@@ -11,7 +11,8 @@
     "export:assets": "node src/export-assets.js",
     "export:stories": "node src/export-stories.js",
     "export:story-content": "node src/export-story-content.js",
-    "build:asset-usage": "node src/build-asset-usage.js"
+    "build:asset-usage": "node src/build-asset-usage.js",
+    "classify:images": "node src/classify-images.js"
   },
   "keywords": [],
   "author": "",
