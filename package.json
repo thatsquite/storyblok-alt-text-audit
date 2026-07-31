@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "probe:assets": "node src/probe-assets.js",
-    "probe:folders": "node src/probe-folders.js"
+    "probe:folders": "node src/probe-folders.js",
+    "build:folder-paths": "node src/build-folder-paths.js"
   },
   "keywords": [],
   "author": "",
