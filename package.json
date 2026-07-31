@@ -9,7 +9,8 @@
     "probe:folders": "node src/probe-folders.js",
     "build:folder-paths": "node src/build-folder-paths.js",
     "export:assets": "node src/export-assets.js",
-    "export:stories": "node src/export-stories.js"
+    "export:stories": "node src/export-stories.js",
+    "export:story-content": "node src/export-story-content.js"
   },
   "keywords": [],
   "author": "",
