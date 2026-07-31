@@ -12,12 +12,14 @@
     "export:stories": "node src/export-stories.js",
     "export:story-content": "node src/export-story-content.js",
     "build:asset-usage": "node src/build-asset-usage.js",
-    "classify:images": "node src/classify-images.js"
+    "classify:images": "node src/classify-images.js",
+    "export:audit-excel": "node src/export-audit-excel.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "exceljs": "^4.4.0"
   }
 }
