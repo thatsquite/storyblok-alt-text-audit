@@ -1,0 +1,142 @@
+{
+  "summary": {
+    "generated_at": "2026-01-01T00:00:00.000Z",
+    "space_id": 9999,
+    "story_index_records": 4,
+    "folder_records_skipped": 0,
+    "expected_content_stories": 4,
+    "stories_retrieved": 4,
+    "story_total_matches": true,
+    "failed_story_count": 0,
+    "published_stories": 4,
+    "unpublished_stories": 0,
+    "stories_with_content": 4,
+    "content_type_counts": {
+      "contentPage": 2,
+      "teamMemberType": 1,
+      "donorPartnerType": 1
+    }
+  },
+  "stories": [
+    {
+      "story_id": 4001,
+      "story_uuid": "10000000-0000-4000-8000-000000000001",
+      "name": "Example agriculture project",
+      "slug": "example-agriculture-project",
+      "full_slug": "projects/example-agriculture-project",
+      "content_type": "contentPage",
+      "is_folder": false,
+      "is_startpage": false,
+      "published": true,
+      "unpublished_changes": false,
+      "content": {
+        "component": "contentPage",
+        "heroImage": {
+          "id": 1003,
+          "alt": "",
+          "title": "",
+          "filename": "https://example.invalid/f/9999/photos/farm-training.jpg",
+          "copyright": "Example photographer",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "shareImage": {
+          "id": null,
+          "alt": "",
+          "title": "",
+          "filename": "",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        }
+      }
+    },
+    {
+      "story_id": 4002,
+      "story_uuid": "10000000-0000-4000-8000-000000000002",
+      "name": "Example Foundation",
+      "slug": "example-foundation",
+      "full_slug": "donors-and-partners/example-foundation",
+      "content_type": "donorPartnerType",
+      "is_folder": false,
+      "is_startpage": false,
+      "published": true,
+      "unpublished_changes": false,
+      "content": {
+        "component": "donorPartnerType",
+        "logo": {
+          "id": 1002,
+          "alt": "",
+          "title": "",
+          "filename": "https://example.invalid/f/9999/logos/example-foundation-logo.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        }
+      }
+    },
+    {
+      "story_id": 4003,
+      "story_uuid": "10000000-0000-4000-8000-000000000003",
+      "name": "Jan Jansen",
+      "slug": "jan-jansen",
+      "full_slug": "team/jan-jansen",
+      "content_type": "teamMemberType",
+      "is_folder": false,
+      "is_startpage": false,
+      "published": true,
+      "unpublished_changes": false,
+      "content": {
+        "component": "teamMemberType",
+        "portrait": {
+          "id": 1001,
+          "alt": "",
+          "title": "",
+          "filename": "https://example.invalid/f/9999/team/jan-jansen.jpg",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        }
+      }
+    },
+    {
+      "story_id": 4004,
+      "story_uuid": "10000000-0000-4000-8000-000000000004",
+      "name": "Example country page",
+      "slug": "example-country",
+      "full_slug": "countries/example-country",
+      "content_type": "contentPage",
+      "is_folder": false,
+      "is_startpage": false,
+      "published": true,
+      "unpublished_changes": false,
+      "content": {
+        "component": "contentPage",
+        "hero": {
+          "id": 1004,
+          "alt": "Green fields beside a river under a cloudy sky",
+          "title": "",
+          "filename": "https://example.invalid/f/9999/photos/landscape.jpg",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "legacyLogo": {
+          "id": 9090,
+          "alt": "",
+          "title": "",
+          "filename": "https://example.invalid/f/9999/legacy/old-logo.svg",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        }
+      }
+    }
+  ]
+}

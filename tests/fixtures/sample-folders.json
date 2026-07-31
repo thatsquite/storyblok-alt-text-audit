@@ -1,0 +1,46 @@
+{
+  "asset_folders": [
+    {
+      "id": 2000,
+      "name": "Photos",
+      "parent_id": 0,
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "parent_uuid": null
+    },
+    {
+      "id": 2001,
+      "name": "Team members",
+      "parent_id": 0,
+      "uuid": "00000000-0000-4000-8000-000000000002",
+      "parent_uuid": null
+    },
+    {
+      "id": 2002,
+      "name": "Logo partner/donor",
+      "parent_id": 0,
+      "uuid": "00000000-0000-4000-8000-000000000003",
+      "parent_uuid": null
+    },
+    {
+      "id": 2003,
+      "name": "Example region",
+      "parent_id": 2000,
+      "uuid": "00000000-0000-4000-8000-000000000004",
+      "parent_uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": 2005,
+      "name": "Example country",
+      "parent_id": 2003,
+      "uuid": "00000000-0000-4000-8000-000000000005",
+      "parent_uuid": "00000000-0000-4000-8000-000000000004"
+    },
+    {
+      "id": 2006,
+      "name": "Documents",
+      "parent_id": 0,
+      "uuid": "00000000-0000-4000-8000-000000000006",
+      "parent_uuid": null
+    }
+  ]
+}

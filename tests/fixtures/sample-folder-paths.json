@@ -1,0 +1,52 @@
+{
+  "folder_paths": [
+    {
+      "id": 2000,
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "Photos",
+      "parent_id": 0,
+      "parent_uuid": null,
+      "full_path": "Photos"
+    },
+    {
+      "id": 2001,
+      "uuid": "00000000-0000-4000-8000-000000000002",
+      "name": "Team members",
+      "parent_id": 0,
+      "parent_uuid": null,
+      "full_path": "Team members"
+    },
+    {
+      "id": 2002,
+      "uuid": "00000000-0000-4000-8000-000000000003",
+      "name": "Logo partner/donor",
+      "parent_id": 0,
+      "parent_uuid": null,
+      "full_path": "Logo partner/donor"
+    },
+    {
+      "id": 2003,
+      "uuid": "00000000-0000-4000-8000-000000000004",
+      "name": "Example region",
+      "parent_id": 2000,
+      "parent_uuid": "00000000-0000-4000-8000-000000000001",
+      "full_path": "Photos > Example region"
+    },
+    {
+      "id": 2005,
+      "uuid": "00000000-0000-4000-8000-000000000005",
+      "name": "Example country",
+      "parent_id": 2003,
+      "parent_uuid": "00000000-0000-4000-8000-000000000004",
+      "full_path": "Photos > Example region > Example country"
+    },
+    {
+      "id": 2006,
+      "uuid": "00000000-0000-4000-8000-000000000006",
+      "name": "Documents",
+      "parent_id": 0,
+      "parent_uuid": null,
+      "full_path": "Documents"
+    }
+  ]
+}
