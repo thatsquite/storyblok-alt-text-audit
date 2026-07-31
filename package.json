@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "storyblok-alt-text-audit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "probe:assets": "node src/probe-assets.js",
+    "probe:folders": "node src/probe-folders.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
