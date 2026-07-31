@@ -8,7 +8,8 @@
     "probe:assets": "node src/probe-assets.js",
     "probe:folders": "node src/probe-folders.js",
     "build:folder-paths": "node src/build-folder-paths.js",
-    "export:assets": "node src/export-assets.js"
+    "export:assets": "node src/export-assets.js",
+    "export:stories": "node src/export-stories.js"
   },
   "keywords": [],
   "author": "",
