@@ -13,7 +13,10 @@
     "export:story-content": "node src/export-story-content.js",
     "build:asset-usage": "node src/build-asset-usage.js",
     "classify:images": "node src/classify-images.js",
-    "export:audit-excel": "node src/export-audit-excel.js"
+    "export:audit-excel": "node src/export-audit-excel.js",
+    "classify:documents": "node src/classify-documents.js",
+    "check:coverage": "node src/check-coverage.js",
+    "export:document-excel": "node src/export-document-excel.js"
   },
   "keywords": [],
   "author": "",

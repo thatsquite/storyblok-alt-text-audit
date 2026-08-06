@@ -1,0 +1,1117 @@
+[
+  {
+    "tag": "2Scale",
+    "aliases": ["2 scale", "2scale"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "4PS",
+    "aliases": ["4ps"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ABC",
+    "aliases": [
+      "abc kenya",
+      "abc ofvi",
+      "abc project",
+      "abc sahel",
+      "abc uganda"
+    ],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "ABPP",
+    "aliases": ["abpp"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "AGRIADAPTA",
+    "aliases": ["agriadapta"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ASPIRE",
+    "aliases": ["aspire ethiopia", "aspire project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "BEAM",
+    "aliases": ["beam bangladesh", "beam fund"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "BECA",
+    "aliases": ["beca project", "beca vietnam"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "Beyond the Finish Line",
+    "aliases": ["beyond the finish line"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "BIPSC",
+    "aliases": ["biposc", "bipsc"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Biruh Tesfa",
+    "aliases": ["biruh tesfa"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "BLF",
+    "aliases": ["biodiverse landscape fund", "blf lower mekong"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Blue Deal",
+    "aliases": ["blue deal"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "BRIDGE",
+    "aliases": [
+      "bridge amhara",
+      "bridge ethiopia",
+      "bridge oromia",
+      "bridge project",
+      "bridge snnp",
+      "bridge tigray"
+    ],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "BRILHO",
+    "aliases": ["brilho"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "Cafe-REDD",
+    "aliases": ["cafe redd", "caferedd"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "CASHA",
+    "aliases": ["casha"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "CHAIN",
+    "aliases": [
+      "chain cambodia",
+      "chain htg",
+      "chain phase",
+      "chain project",
+      "sdc chain"
+    ],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "CORE-Africa",
+    "aliases": ["core africa"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "CRAFT",
+    "aliases": [
+      "craft kenya",
+      "craft project",
+      "craft tanzania",
+      "craft uganda"
+    ],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "CREWS",
+    "aliases": ["crews kenya", "crews project"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "CRSP",
+    "aliases": ["crsp"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "CWISE",
+    "aliases": ["cwise"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "DEMA LIBA",
+    "aliases": ["dema liba"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "DEPLI",
+    "aliases": ["depli"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "DeSIRA",
+    "aliases": ["desira"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "DFCD",
+    "aliases": ["dfcd"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "DREAM",
+    "aliases": ["dream ethiopia", "dream project"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "DURAGIRE",
+    "aliases": ["duragire"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "ECDD",
+    "aliases": ["ecdd"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "EDGET",
+    "aliases": ["edget"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "EEP Africa",
+    "aliases": ["eep africa", "eep trust fund"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "EEVJM",
+    "aliases": ["eevjm"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "EJASA",
+    "aliases": ["ejasa"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "EKYAN",
+    "aliases": ["ekyan"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ELSAM",
+    "aliases": ["elsam"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "EMRIP",
+    "aliases": ["emrip"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "EnDev",
+    "aliases": ["endev", "energising development"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "ENRICH",
+    "aliases": ["enrich project", "enrich vietnam"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ENUFF",
+    "aliases": ["enuff"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "EOWE",
+    "aliases": ["eowe"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ESPAL",
+    "aliases": ["espal"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "FtMA",
+    "aliases": ["ftma"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "GAFSP",
+    "aliases": ["gafsp"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "GAZORIZ",
+    "aliases": ["gazoriz"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "GeraSol",
+    "aliases": ["gerasol"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "GEWE",
+    "aliases": ["gewe"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "Gikuriro",
+    "aliases": ["gikuriro"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "GLD",
+    "aliases": ["gld mali", "gld project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "GOTAS",
+    "aliases": ["gotas"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "GRAD",
+    "aliases": ["grad ethiopia", "grad project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "GREAT",
+    "aliases": ["great project", "great vietnam"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "GrEEn",
+    "aliases": [
+      "boosting green employment",
+      "green ghana",
+      "green private sector",
+      "green project",
+      "greenflyer"
+    ],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Greener Greens",
+    "aliases": ["greener greens"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Healthy Future For All",
+    "aliases": ["healthy future for all"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "HortiLIFE",
+    "aliases": ["horti life", "hortilife"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "HortInvest",
+    "aliases": ["horti invest", "hortinvest"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "HTCC",
+    "aliases": ["htcc"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "HVAP",
+    "aliases": ["hvap"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "I4ID",
+    "aliases": ["i4id"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "IAP",
+    "aliases": ["iap project", "innovations against poverty"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ICCC",
+    "aliases": ["iccc"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "ICRM",
+    "aliases": ["icrm"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ICSIAPL",
+    "aliases": ["icsiapl"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "IDAN",
+    "aliases": ["idan niger", "idan project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "IGATE",
+    "aliases": ["igate"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "ILGH",
+    "aliases": ["ilgh"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "IMEU",
+    "aliases": ["imeu"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "INCLUDE",
+    "aliases": ["include project", "include uganda"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "INCREASE",
+    "aliases": ["increase project", "increase zambia"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "ISLA",
+    "aliases": ["isla biogas", "isla kenya", "isla project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ISSKHPP",
+    "aliases": ["isskhpp"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "Isuku Iwacu",
+    "aliases": ["isuku", "isuku iwacu"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "IUWASH",
+    "aliases": ["iuwash"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "IWAS",
+    "aliases": ["iwas"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "IYBA SEED",
+    "aliases": ["iyba", "iyba seed"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "JEEN",
+    "aliases": ["jeen"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Kelola Sendang",
+    "aliases": ["kelola sendang"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "KIAT",
+    "aliases": ["kiat indonesia", "kiat project"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "KIWASH",
+    "aliases": ["kiwash"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "KMDP",
+    "aliases": ["kmdp"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "KOSAP",
+    "aliases": ["kosap"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "Kunzila ILMWA",
+    "aliases": ["ilmwa", "kunzila"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "LASSO",
+    "aliases": ["lasso"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "LEAF",
+    "aliases": ["leaf laos", "leaf project", "leaf vietnam"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "LI-WAY",
+    "aliases": ["li way", "liway"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "LISTEN",
+    "aliases": ["listen kenya", "listen project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "LURAS",
+    "aliases": ["luras"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "MAM",
+    "aliases": ["mam vietnam", "mangroves and markets"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "MANOPAV",
+    "aliases": ["manopav"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "MB-REDD",
+    "aliases": ["mb redd", "mbredd"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "MBEA",
+    "aliases": ["mbea"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "MECS",
+    "aliases": ["mecs"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "MERIT",
+    "aliases": ["merit mali", "merit project"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "MINE",
+    "aliases": ["mine egg hub", "mine ethiopia"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "MODHEM",
+    "aliases": ["modhem"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "MOPSS",
+    "aliases": ["mopss"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "NBPE",
+    "aliases": ["nbpe"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "NHWC",
+    "aliases": ["nhwc"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "NOURISH",
+    "aliases": ["nourish project", "nourish tanzania", "nourish tz"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "NUTRIBEC",
+    "aliases": ["nutribec"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "NutriDense",
+    "aliases": ["nutri dense", "nutridense"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "OYE",
+    "aliases": [
+      "opportunities for youth employment",
+      "oye market",
+      "oye phase",
+      "oye project"
+    ],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "P2P",
+    "aliases": ["p2p ghana", "p2p project"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "PADANE",
+    "aliases": ["padance", "padane"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PADEE",
+    "aliases": ["padee"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PAHALA",
+    "aliases": ["pahala"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PANI",
+    "aliases": ["pani nepal", "pani project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PAO2P3",
+    "aliases": ["pao2p3"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PAPEA",
+    "aliases": ["papea"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PASANAD",
+    "aliases": ["pasanad"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PASEFA",
+    "aliases": ["pasefa"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PASEL",
+    "aliases": ["pasel"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PASEM",
+    "aliases": ["pasem"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PDIEM",
+    "aliases": ["pdiem"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PEPCI",
+    "aliases": ["pepci"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PGLR",
+    "aliases": ["pglr"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Power for Food",
+    "aliases": ["pff", "power for food"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "PRIME",
+    "aliases": ["prime ethiopia", "prime project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Pro-ARIDES",
+    "aliases": ["pro arides", "proarides"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ProCOREP",
+    "aliases": ["procorep"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PRODIATA",
+    "aliases": ["prodiata"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "PRONASAR",
+    "aliases": ["pronasar"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "PURE",
+    "aliases": ["pure project", "pure technologies", "pure x"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "RAYEE",
+    "aliases": ["rayee"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "REALMS",
+    "aliases": ["realms"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "REAP",
+    "aliases": ["reap", "reap project", "redd", "redd ja", "redd plus"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "ReCIC",
+    "aliases": ["recic"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "RESCOM",
+    "aliases": ["rescom"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "RESECO",
+    "aliases": ["reseco"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "RESILIA",
+    "aliases": ["resilia"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "RESTORE",
+    "aliases": ["restore project", "restore vietnam", "restore vn"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "RHIFA",
+    "aliases": ["rhifa"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "RISE",
+    "aliases": ["rise ethiopia", "rise project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "RISMFP",
+    "aliases": ["rismfp"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "S4H",
+    "aliases": ["s4h"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "SANIMAS",
+    "aliases": ["sanimas"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "SaniWASE",
+    "aliases": ["saniwase"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "SASCI",
+    "aliases": ["sasci"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "SE4ALL",
+    "aliases": ["se4all"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "SEDP",
+    "aliases": ["sedp"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "SEECCS",
+    "aliases": ["seeccs", "seecs"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "SEFFA",
+    "aliases": ["seffa"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SHIFT",
+    "aliases": ["shift project", "shift vietnam"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "Smoke Free Village",
+    "aliases": ["smoke free village", "smoke free zone"],
+    "requireContext": false,
+    "sector": "Energy"
+  },
+  {
+    "tag": "SN4A",
+    "aliases": ["sn4a"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SoilFERT",
+    "aliases": ["soil fert", "soilfert"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Srikandi",
+    "aliases": ["srikandi"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SRIWSMP",
+    "aliases": ["sriwsmp"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SSF",
+    "aliases": ["ssf rvo", "ssf tanzania"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SSH4A",
+    "aliases": ["ssh4a"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "STAMP",
+    "aliases": ["stamp mali", "stamp project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SUPOPI",
+    "aliases": ["supopi"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SUPREME",
+    "aliases": ["supreme project", "supreme uganda"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SURPASS",
+    "aliases": ["surpass indonesia", "surpass project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "SUSTAIN",
+    "aliases": ["sustain africa", "sustain eco", "sustain project"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "SUWC",
+    "aliases": ["sustainable urban water cycles", "suwc"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "SWaSSH4A",
+    "aliases": ["swassh4a"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "SWITCH",
+    "aliases": ["switch project", "switch uganda"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "T-WASH",
+    "aliases": ["t wash", "twash"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "TIDE",
+    "aliases": ["tide isdap", "tide phase", "tide project", "tide uganda"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "TLI",
+    "aliases": ["transformative land investment"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "TRANSFORM",
+    "aliases": ["transform ethiopia", "transform project", "transform wash"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "TRVC",
+    "aliases": ["trvc"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "UDUMA",
+    "aliases": ["uduma"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "V4C",
+    "aliases": ["v4c project", "voice for change"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "V4CP",
+    "aliases": ["v4cp"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Veggies 4 Planet & People",
+    "aliases": ["v4p p", "v4pp", "veggies 4 planet"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "VN-ADAPT",
+    "aliases": ["vn adapt", "vnadapt"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "WASH SDG",
+    "aliases": ["wash sdg", "washsdg"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "WASHTRA",
+    "aliases": ["washtra"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "Water Voices United",
+    "aliases": ["water voices united"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "WEAVE",
+    "aliases": ["weave project", "weave vietnam"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "WS4H",
+    "aliases": ["ws4h"],
+    "requireContext": false,
+    "sector": "Water"
+  },
+  {
+    "tag": "YAWWA",
+    "aliases": ["yawwa"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "YEA-R",
+    "aliases": ["yea r"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "YEE",
+    "aliases": ["yee aet", "yee irish aid", "yee project"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "REDD+",
+    "aliases": ["redd", "redd plus", "redd+"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "REAP",
+    "aliases": ["reap", "reap project", "repp+", "repp plus"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  },
+  {
+    "tag": "Zambuko",
+    "aliases": ["zambuko"],
+    "requireContext": false,
+    "sector": "Agri-Food"
+  }
+]
