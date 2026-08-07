@@ -16,7 +16,10 @@
     "export:audit-excel": "node src/export-audit-excel.js",
     "classify:documents": "node src/classify-documents.js",
     "check:coverage": "node src/check-coverage.js",
-    "export:document-excel": "node src/export-document-excel.js"
+    "export:document-excel": "node src/export-document-excel.js",
+    "generate:alt-text": "node src/generate-alt-text.js",
+    "export:approved-alt": "node src/export-approved-alt.js",
+    "update:asset-alt": "node src/update-asset-alt.js"
   },
   "keywords": [],
   "author": "",
