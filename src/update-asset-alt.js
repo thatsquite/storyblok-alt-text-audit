@@ -28,9 +28,24 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const APPROVED_FILE = path.join(__dirname, "..", "output", "approved-alt-updates.json");
-const CHECKPOINT_FILE = path.join(__dirname, "..", "output", "update-asset-alt-checkpoint.json");
-const LOG_FILE = path.join(__dirname, "..", "output", "update-asset-alt-log.json");
+const APPROVED_FILE = path.join(
+  __dirname,
+  "..",
+  "output",
+  "approved-alt-updates.json",
+);
+const CHECKPOINT_FILE = path.join(
+  __dirname,
+  "..",
+  "output",
+  "update-asset-alt-checkpoint.json",
+);
+const LOG_FILE = path.join(
+  __dirname,
+  "..",
+  "output",
+  "update-asset-alt-log.json",
+);
 
 const APPLY = process.argv.includes("--apply");
 const DELAY_MS = Number(process.env.WB_DELAY_MS || 250); // ~4/sec, under the 6/sec cap
@@ -62,12 +77,30 @@ async function writeJson(file, data) {
   await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
 }
 
+// Parse a fetch response safely. Storyblok may return an empty body on a
+// successful PUT, which would make res.json() throw "Unexpected end of JSON
+// input". Read text first, parse only if there is content.
+async function parseResponse(res) {
+  const text = await res.text();
+  if (!text) return {};
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { raw: text };
+  }
+}
+
 async function getAsset(assetId) {
   const res = await fetch(`${baseUrl}/v1/spaces/${spaceId}/assets/${assetId}`, {
     headers: { Authorization: token, Accept: "application/json" },
   });
-  if (!res.ok) throw new Error(`GET asset ${assetId} failed: ${res.status}`);
-  return res.json();
+  if (!res.ok) {
+    const body = await parseResponse(res);
+    throw new Error(
+      `GET asset ${assetId} failed: ${res.status} ${JSON.stringify(body)}`,
+    );
+  }
+  return parseResponse(res);
 }
 
 // Preserve existing meta_data, change only alt (matches README body shape).
@@ -84,10 +117,13 @@ async function putAssetAlt(assetId, currentAsset, newAlt) {
     body: JSON.stringify(body),
   });
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`PUT asset ${assetId} failed: ${res.status} ${text}`);
+    const errBody = await parseResponse(res);
+    throw new Error(
+      `PUT asset ${assetId} failed: ${res.status} ${JSON.stringify(errBody)}`,
+    );
   }
-  return res.json();
+  // Success. Body may be empty; that is fine, we do not need it.
+  return parseResponse(res);
 }
 
 async function withRetry(fn, label) {
@@ -98,7 +134,9 @@ async function withRetry(fn, label) {
     } catch (err) {
       lastErr = err;
       const backoff = attempt * 2000;
-      console.warn(`  retry ${attempt}/${MAX_RETRIES} (${label}) after ${backoff}ms: ${err.message}`);
+      console.warn(
+        `  retry ${attempt}/${MAX_RETRIES} (${label}) after ${backoff}ms: ${err.message}`,
+      );
       await sleep(backoff);
     }
   }
@@ -113,17 +151,23 @@ async function main() {
 
   const approved = await readJsonOr(APPROVED_FILE, null);
   if (!approved) {
-    console.error(`No approved file at ${APPROVED_FILE}. Run export-approved-alt.js first.`);
+    console.error(
+      `No approved file at ${APPROVED_FILE}. Run export-approved-alt.js first.`,
+    );
     process.exit(1);
   }
 
   // Guard: refuse any blank alt even if it slipped through.
-  const clean = approved.filter((u) => u.alt && String(u.alt).trim().length > 0);
+  const clean = approved.filter(
+    (u) => u.alt && String(u.alt).trim().length > 0,
+  );
   const blanks = approved.length - clean.length;
 
   console.log(`Mode: ${APPLY ? "APPLY (live)" : "DRY RUN"}`);
   console.log(`Region: ${region}  Host: ${baseUrl}`);
-  console.log(`Approved updates: ${clean.length}${blanks ? `  (skipped ${blanks} blank)` : ""}`);
+  console.log(
+    `Approved updates: ${clean.length}${blanks ? `  (skipped ${blanks} blank)` : ""}`,
+  );
 
   // ---- DRY RUN: show current vs approved, change nothing. ----------------
   if (!APPLY) {
@@ -132,10 +176,14 @@ async function main() {
         try {
           const current = await getAsset(u.asset_id);
           const before = current.asset?.meta_data?.alt ?? "";
-          console.log(`  asset ${u.asset_id}: "${before}"  ->  "${u.alt}"  (${u.filename})`);
+          console.log(
+            `  asset ${u.asset_id}: "${before}"  ->  "${u.alt}"  (${u.filename})`,
+          );
           await sleep(DELAY_MS);
         } catch (err) {
-          console.log(`  asset ${u.asset_id}: [could not read current] -> "${u.alt}"  (${err.message})`);
+          console.log(
+            `  asset ${u.asset_id}: [could not read current] -> "${u.alt}"  (${err.message})`,
+          );
         }
       } else {
         console.log(`  asset ${u.asset_id}  ->  "${u.alt}"  (${u.filename})`);
@@ -148,7 +196,9 @@ async function main() {
 
   // ---- APPLY guardrails ---------------------------------------------------
   if (!token || !spaceId) {
-    console.error(`Missing STORYBLOK_MANAGEMENT_TOKEN or STORYBLOK_SPACE_ID in .env`);
+    console.error(
+      `Missing STORYBLOK_MANAGEMENT_TOKEN or STORYBLOK_SPACE_ID in .env`,
+    );
     process.exit(1);
   }
 
@@ -156,7 +206,10 @@ async function main() {
   const log = await readJsonOr(LOG_FILE, []);
   const rollback = [];
   const rollbackFile = path.join(
-    __dirname, "..", "output", `rollback-${new Date().toISOString().replace(/[:.]/g, "-")}.json`
+    __dirname,
+    "..",
+    "output",
+    `rollback-${new Date().toISOString().replace(/[:.]/g, "-")}.json`,
   );
 
   let applied = 0;
@@ -173,9 +226,16 @@ async function main() {
       });
       await writeJson(rollbackFile, rollback);
 
-      await withRetry(() => putAssetAlt(u.asset_id, current, u.alt), `put ${id}`);
+      await withRetry(
+        () => putAssetAlt(u.asset_id, current, u.alt),
+        `put ${id}`,
+      );
 
-      log.push({ asset_id: u.asset_id, new_alt: u.alt, applied_at: new Date().toISOString() });
+      log.push({
+        asset_id: u.asset_id,
+        new_alt: u.alt,
+        applied_at: new Date().toISOString(),
+      });
       checkpoint.done[id] = true;
       applied++;
 
@@ -185,7 +245,11 @@ async function main() {
         console.log(`  ...${applied} applied`);
       }
     } catch (err) {
-      log.push({ asset_id: u.asset_id, error: String(err.message || err), failed_at: new Date().toISOString() });
+      log.push({
+        asset_id: u.asset_id,
+        error: String(err.message || err),
+        failed_at: new Date().toISOString(),
+      });
       await writeJson(LOG_FILE, log);
       console.error(`  FAILED asset ${id}: ${err.message}`);
     }

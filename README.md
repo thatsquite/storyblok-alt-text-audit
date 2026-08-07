@@ -258,15 +258,38 @@ npm run update:asset-alt -- --apply
 - A checkpoint file lets a stopped run resume without double-writing.
 - Rate limiting stays under the Storyblok limit of 6 requests per second.
 
+### Rollback
+
+Every `update:asset-alt --apply` writes a snapshot of each asset's previous
+`meta_data.alt` to `output/rollback-<timestamp>.json` before changing anything.
+To undo a run, replay that snapshot with `src/restore-asset-alt.js`, which
+restores each asset's previous alt.
+
+```powershell
+# Dry run. Shows what would be restored, sends nothing.
+node src/restore-asset-alt.js --file output/rollback-<timestamp>.json
+
+# Restore for real.
+node src/restore-asset-alt.js --file output/rollback-<timestamp>.json --apply
+```
+
+Notes:
+
+- You must name the exact snapshot file, so there is no ambiguity about which
+  run you are undoing.
+- The restore does not delete the snapshot, so it can be run again if needed.
+- The restore does not create its own snapshot. To undo a restore, re-run the
+  forward write-back.
+
 ### Suggested first milestone
 
-Push the team member and donor or partner logo alt text first. That is 1,432
-images whose alt text is already decided and needs no AI. It proves the
-write-back pipeline end to end on low-risk, high-confidence values before
-touching the AI candidates.
+Push the team member and donor or partner logo alt text first. That is the set
+whose alt text is already decided and needs no AI. It proves the write-back
+pipeline end to end on low-risk, high-confidence values before touching the AI
+candidates.
 
-Before a full `--apply`, update ONE asset and confirm what the website actually
-renders from `meta_data.alt`.
+Before a large `--apply`, update a few assets first and confirm what the
+website actually renders from `meta_data.alt`.
 
 ## Outputs
 
@@ -282,6 +305,7 @@ output/storyblok-image-alt-audit.xlsx
 output/storyblok-pdf-tag-audit.xlsx
 output/approved-alt-updates.json
 output/update-asset-alt-log.json
+output/update-asset-alt-checkpoint.json
 output/rollback-<timestamp>.json
 ```
 
@@ -350,9 +374,11 @@ Implemented:
 - Excel review workbooks for images and PDFs
 - AI alt text generator for AI-candidate images (provider swappable,
   gated on an approved enterprise vision API)
+- Optional pre-fill of approvals for the decided sheets
 - Import of reviewer decisions from the Excel workbook
 - Approved update export
 - Reviewed Storyblok write-back with dry run, rollback, and logging
+- Rollback restore from a snapshot file
 
 Not implemented:
 
