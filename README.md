@@ -151,14 +151,19 @@ STORYBLOK_MANAGEMENT_TOKEN=
 STORYBLOK_SPACE_ID=
 STORYBLOK_REGION=eu
 
-# Only needed for AI alt text generation
-VISION_PROVIDER=azure-openai
-VISION_API_KEY=
-AZURE_OPENAI_ENDPOINT=
-AZURE_OPENAI_DEPLOYMENT=
+# Only needed for AI alt text generation (Google Gemini API or Azure OpenAI)
+VISION_PROVIDER=google
+GOOGLE_API_KEY=
+GOOGLE_MODEL=gemini-flash-latest
 
-# Optional pacing
-ALT_DELAY_MS=1200
+# Or if using Azure OpenAI:
+# VISION_PROVIDER=azure-openai
+# VISION_API_KEY=
+# AZURE_OPENAI_ENDPOINT=
+# AZURE_OPENAI_DEPLOYMENT=
+
+# Optional pacing (4000ms recommended for Google AI Studio Free Tier 15 RPM limit)
+ALT_DELAY_MS=4000
 WB_DELAY_MS=250
 ```
 
@@ -198,9 +203,13 @@ Only the `Storyblok AI candidate` images need generation. Team member and
 donor or partner logo alt text is already derived without AI, so those do not
 depend on this step.
 
-Generation is gated by SNV policy: free AI tools are not allowed for SNV data.
-An approved, enterprise vision service and key must be in place first. The
-provider is swappable in `src/providers/vision-provider.js`.
+The provider is swappable in `src/providers/vision-provider.js` (`google` or `azure-openai`).
+
+To use Google Gemini API (Free Tier via Google AI Studio):
+1. Obtain a free API key at [aistudio.google.com](https://aistudio.google.com).
+2. Set `VISION_PROVIDER=google` and `GOOGLE_API_KEY=your_key` in `.env`.
+3. Default model: `gemini-flash-latest`. The delay `ALT_DELAY_MS` is set to `4000` (4 seconds) to remain safely within Google AI Studio's free limit of 15 requests per minute (1,500 free requests per day).
+
 
 ```powershell
 # Test on a few images first

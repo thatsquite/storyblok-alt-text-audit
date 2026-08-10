@@ -1,4 +1,5 @@
 import "dotenv/config";
+import path from "node:path";
 
 // vision-provider.js
 // API-agnostic wrapper around whatever vision model SNV approves.
@@ -6,9 +7,6 @@ import "dotenv/config";
 // The rest of the pipeline only ever calls generateAltText(). It never
 // knows or cares which provider is behind it. To switch providers later
 // (Azure OpenAI, Google, AWS, etc.), you only edit THIS file. Nothing else.
-//
-// The Azure OpenAI path is stubbed as the most likely approved option.
-// Fill it in once ICT (Chitra) confirms the endpoint, deployment, and key.
 
 const PROVIDER = process.env.VISION_PROVIDER || "azure-openai";
 
@@ -23,14 +21,138 @@ const PROVIDER = process.env.VISION_PROVIDER || "azure-openai";
  * @returns {Promise<{ altText: string, raw: object }>}
  */
 export async function generateAltText(input) {
-  switch (PROVIDER) {
+  switch (PROVIDER.toLowerCase()) {
     case "azure-openai":
       return callAzureOpenAI(input);
-    // case "google-vertex": return callGoogleVertex(input);
+    case "google":
+    case "google-gemini":
+    case "gemini":
+      return callGoogleGemini(input);
     // case "aws-bedrock":   return callAwsBedrock(input);
     default:
       throw new Error(`Unknown VISION_PROVIDER: ${PROVIDER}`);
   }
+}
+
+// ---- Google Gemini implementation -----------------------------------------
+// Env vars expected:
+//   GOOGLE_API_KEY (or GEMINI_API_KEY / VISION_API_KEY)
+//   GOOGLE_MODEL (optional, default: gemini-2.5-flash)
+async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, userPrompt }) {
+  const apiKey =
+    process.env.GOOGLE_API_KEY ||
+    process.env.GEMINI_API_KEY ||
+    process.env.VISION_API_KEY;
+
+  if (!apiKey) {
+    throw new Error(
+      "Missing GOOGLE_API_KEY, GEMINI_API_KEY, or VISION_API_KEY in .env"
+    );
+  }
+
+  const requestedModel = (process.env.GOOGLE_MODEL || "gemini-flash-latest").replace(/^models\//, "");
+  // Standard models to attempt in case of model alias mismatch
+  const modelCandidates = Array.from(
+    new Set([
+      requestedModel,
+      "gemini-flash-latest",
+      "gemini-2.5-flash",
+      "gemini-2.0-flash",
+      "gemini-1.5-flash-latest",
+    ])
+  );
+
+  const filledUserPrompt = userPrompt
+    .replace("{{filename}}", filename || "")
+    .replace("{{folder_path}}", folderPath || "");
+
+  // 1. Fetch image from Storyblok public URL
+  let imgRes;
+  try {
+    imgRes = await fetch(imageUrl, {
+      headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
+    });
+  } catch (err) {
+    throw new Error(`Network error fetching image from URL (${imageUrl}): ${err.message}`);
+  }
+  if (!imgRes.ok) {
+    throw new Error(`Failed to fetch image from URL (${imgRes.status}): ${imageUrl}`);
+  }
+  const arrayBuffer = await imgRes.arrayBuffer();
+  const base64Data = Buffer.from(arrayBuffer).toString("base64");
+
+  let mimeType = imgRes.headers.get("content-type");
+  if (!mimeType || !mimeType.startsWith("image/")) {
+    const ext = path.extname(filename || imageUrl).toLowerCase();
+    if (ext === ".png") mimeType = "image/png";
+    else if (ext === ".webp") mimeType = "image/webp";
+    else if (ext === ".gif") mimeType = "image/gif";
+    else if (ext === ".svg") mimeType = "image/svg+xml";
+    else mimeType = "image/jpeg";
+  }
+
+  const body = {
+    system_instruction: systemPrompt
+      ? { parts: [{ text: systemPrompt }] }
+      : undefined,
+    contents: [
+      {
+        role: "user",
+        parts: [
+          { text: filledUserPrompt },
+          {
+            inline_data: {
+              mime_type: mimeType,
+              data: base64Data,
+            },
+          },
+        ],
+      },
+    ],
+    generationConfig: {
+      temperature: 0.2,
+      maxOutputTokens: 1000,
+    },
+  };
+
+  let lastError;
+  for (const model of modelCandidates) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (response.ok) {
+      const raw = await response.json();
+      const parts = raw?.candidates?.[0]?.content?.parts || [];
+      const text = parts.map((p) => p.text).filter(Boolean).join(" ").trim();
+      const altText = text
+        .replace(/^```[a-z]*\n?/i, "")
+        .replace(/\n?```$/i, "")
+        .replace(/^"(.*)"$/, "$1")
+        .replace(/^'(.*)'$/, "$1")
+        .trim();
+      return { altText, raw };
+    }
+
+    const text = await response.text();
+    lastError = new Error(`Google Gemini Vision API error ${response.status} (${model}): ${text}`);
+
+    // If model name returned 404 NOT_FOUND, try the next model candidate in fallback chain
+    if (response.status === 404 && text.includes("NOT_FOUND")) {
+      continue;
+    }
+    // For any non-404 error (e.g. invalid API key, quota limit), throw immediately
+    throw lastError;
+  }
+
+  throw lastError;
 }
 
 // ---- Azure OpenAI implementation (stub) -----------------------------------
@@ -91,3 +213,4 @@ async function callAzureOpenAI({ imageUrl, filename, folderPath, systemPrompt, u
 }
 
 export { PROVIDER };
+
