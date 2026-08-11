@@ -4,36 +4,31 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateAltText, PROVIDER } from "./providers/vision-provider.js";
 
-// generate-alt-text.js
-// Generates alt text ONLY for the "Storyblok AI candidate" images and writes
-// the result back into the proposed_alt field of output/image-alt-audit.json.
-//
-// Why write back into image-alt-audit.json:
-//   Your existing export:audit-excel already renders proposed_alt into the
-//   "AI candidates" sheet, with the reviewer_decision / approved_alt_text /
-//   ready_for_update columns. So after running this, you just re-run
-//   export:audit-excel and review in the SAME workbook. One review surface,
-//   no second drafts file.
-//
-// Safety:
-//   - Reads only workflow_category === "Storyblok AI candidate"
-//   - Makes a one-time backup: output/image-alt-audit.backup.json
-//   - Checkpoint file so a stopped run resumes, never regenerates a done image
-//   - Rate limiting + retry with backoff
-//   - Separate failures file
-//   - --limit N to test on a handful first (e.g. --limit 10)
-//   - Nothing is written to Storyblok here. This is generation only.
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const AUDIT_FILE = path.join(__dirname, "..", "output", "image-alt-audit.json");
-const BACKUP_FILE = path.join(__dirname, "..", "output", "image-alt-audit.backup.json");
+const BACKUP_FILE = path.join(
+  __dirname,
+  "..",
+  "output",
+  "image-alt-audit.backup.json",
+);
 const PROMPT_FILE = path.join(__dirname, "..", "config", "alt-text-prompt.md");
-const CHECKPOINT_FILE = path.join(__dirname, "..", "output", "alt-text-checkpoint.json");
-const FAILURES_FILE = path.join(__dirname, "..", "output", "alt-text-failures.json");
+const CHECKPOINT_FILE = path.join(
+  __dirname,
+  "..",
+  "output",
+  "alt-text-checkpoint.json",
+);
+const FAILURES_FILE = path.join(
+  __dirname,
+  "..",
+  "output",
+  "alt-text-failures.json",
+);
 
 const AI_CATEGORY = "Storyblok AI candidate";
-const DELAY_MS = Number(process.env.ALT_DELAY_MS || 1200);
+const DELAY_MS = Number(process.env.ALT_DELAY_MS || 4200);
 const MAX_RETRIES = 3;
 const CLI_LIMIT = getCliLimit();
 
@@ -46,16 +41,22 @@ async function readJsonOr(file, fallback) {
     return fallback;
   }
 }
+
 async function writeJson(file, data) {
   await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
 }
 
 async function loadPrompts() {
   const md = await fs.readFile(PROMPT_FILE, "utf8");
-  const system = section(md, "## System instruction", "## User instruction template");
+  const system = section(
+    md,
+    "## System instruction",
+    "## User instruction template",
+  );
   const user = section(md, "## User instruction template", null);
   return { systemPrompt: system.trim(), userPrompt: user.trim() };
 }
+
 function section(md, startHeading, endHeading) {
   const start = md.indexOf(startHeading);
   if (start === -1) return "";
@@ -76,8 +77,16 @@ async function withRetry(fn, label) {
       return await fn();
     } catch (err) {
       lastErr = err;
-      const backoff = attempt * 2000;
-      console.warn(`  retry ${attempt}/${MAX_RETRIES} (${label}) after ${backoff}ms: ${err.message}`);
+
+      const isRateLimited =
+        err.message.includes("429") ||
+        err.message.includes("RESOURCE_EXHAUSTED");
+
+      const backoff = isRateLimited ? 60000 : attempt * 2000;
+
+      console.warn(
+        `  retry ${attempt}/${MAX_RETRIES} (${label}) after ${backoff}ms: ${err.message}`,
+      );
       await sleep(backoff);
     }
   }
@@ -94,7 +103,7 @@ async function main() {
     process.exit(1);
   }
 
-  // One-time backup before we ever modify the audit file.
+  // One-time backup before modifying the audit file
   try {
     await fs.access(BACKUP_FILE);
   } catch {
@@ -102,24 +111,55 @@ async function main() {
     console.log(`Backup written: ${path.basename(BACKUP_FILE)}`);
   }
 
-  // Select ONLY the AI candidates. This is the corrected filter.
-  let candidates = audit.images.filter((img) => img.workflow_category === AI_CATEGORY);
-  const totalCandidates = candidates.length;
-  if (CLI_LIMIT) candidates = candidates.slice(0, CLI_LIMIT);
-
-  console.log(`AI candidates in file: ${totalCandidates}`);
-  console.log(`Processing this run: ${candidates.length}${CLI_LIMIT ? ` (--limit ${CLI_LIMIT})` : ""}`);
-
+  // Load checkpoint and failure logs
   const checkpoint = await readJsonOr(CHECKPOINT_FILE, { done: {} });
   const failures = await readJsonOr(FAILURES_FILE, []);
 
-  // Index images by asset_id so we can write results straight back.
+  // 1. Get all AI candidate images
+  const allCandidates = audit.images.filter(
+    (img) => img.workflow_category === AI_CATEGORY,
+  );
+  const totalCandidates = allCandidates.length;
+
+  // 2. Filter out already completed candidates FIRST
+  let pendingCandidates = allCandidates.filter(
+    (img) => !checkpoint.done[String(img.asset_id)],
+  );
+
+  const alreadyDoneCount = totalCandidates - pendingCandidates.length;
+
+  console.log(`AI candidates in file: ${totalCandidates}`);
+  console.log(`Already completed: ${alreadyDoneCount}`);
+  console.log(`Remaining unprocessed: ${pendingCandidates.length}`);
+
+  // 3. Apply CLI limit to remaining unprocessed items
+  if (CLI_LIMIT) {
+    pendingCandidates = pendingCandidates.slice(0, CLI_LIMIT);
+    console.log(`Processing this run limit: ${pendingCandidates.length} (--limit ${CLI_LIMIT})\n`);
+  } else {
+    console.log("\n");
+  }
+
   const byId = new Map(audit.images.map((img) => [img.asset_id, img]));
 
-  let processed = 0;
-  for (const candidate of candidates) {
+  let processedThisRun = 0;
+  const SAFE_DAILY_LIMIT = 490; // Stop before hitting the 500 daily API limit
+
+  for (const candidate of pendingCandidates) {
     const id = String(candidate.asset_id);
-    if (checkpoint.done[id]) continue;
+
+    // Graceful Hard Stop Logic
+    if (processedThisRun >= SAFE_DAILY_LIMIT) {
+      console.log(
+        `\n⏸️ Reached safe daily limit of ${SAFE_DAILY_LIMIT} requests. Stopping gracefully.`,
+      );
+      break;
+    }
+
+    const currentItemNumber = alreadyDoneCount + processedThisRun + 1;
+    console.log(
+      `[${currentItemNumber}/${totalCandidates}] Generating alt text for asset ${id} (${candidate.filename})...`,
+    );
 
     try {
       const { altText } = await withRetry(
@@ -131,24 +171,23 @@ async function main() {
             systemPrompt,
             userPrompt,
           }),
-        `gen ${id}`
+        `gen ${id}`,
       );
 
       const target = byId.get(candidate.asset_id);
-      const needsReview = altText === "NEEDS_HUMAN_REVIEW" || altText.length > 125;
+      const needsReview =
+        altText === "NEEDS_HUMAN_REVIEW" || altText.length > 125;
 
       target.proposed_alt = altText === "NEEDS_HUMAN_REVIEW" ? "" : altText;
       target.proposal_source = "vision_api";
       target.proposal_confidence = needsReview ? "needs_review" : "generated";
 
+      // Mark done & save state
       checkpoint.done[id] = true;
-      processed++;
+      processedThisRun++;
 
-      if (processed % 20 === 0) {
-        await writeJson(AUDIT_FILE, audit);
-        await writeJson(CHECKPOINT_FILE, checkpoint);
-        console.log(`  ...${processed} generated`);
-      }
+      await writeJson(AUDIT_FILE, audit);
+      await writeJson(CHECKPOINT_FILE, checkpoint);
     } catch (err) {
       failures.push({
         asset_id: candidate.asset_id,
@@ -163,14 +202,15 @@ async function main() {
     await sleep(DELAY_MS);
   }
 
-  // Final flush.
-  await writeJson(AUDIT_FILE, audit);
-  await writeJson(CHECKPOINT_FILE, checkpoint);
-  await writeJson(FAILURES_FILE, failures);
-
-  console.log(`\nDone. Generated this run: ${processed}. Failures: ${failures.length}.`);
-  console.log(`Proposals written into proposed_alt in ${path.basename(AUDIT_FILE)}.`);
-  console.log(`Next: npm run export:audit-excel  then review the AI candidates sheet.`);
+  console.log(
+    `\nDone. Generated this run: ${processedThisRun}. Failures: ${failures.length}.`,
+  );
+  console.log(
+    `Proposals written into proposed_alt in ${path.basename(AUDIT_FILE)}.`,
+  );
+  console.log(
+    `Next: npm run export:audit-excel then review the AI candidates sheet.`,
+  );
 }
 
 main().catch((err) => {
