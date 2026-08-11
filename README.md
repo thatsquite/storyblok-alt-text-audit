@@ -144,7 +144,7 @@ npm install
 
 ## Environment variables
 
-Create a local `.env` file:
+Create a local `.env` file (don't commit `.env`.):
 
 ```env
 STORYBLOK_MANAGEMENT_TOKEN=
@@ -157,17 +157,16 @@ GOOGLE_API_KEY=
 GOOGLE_MODEL=gemini-flash-latest
 
 # Or if using Azure OpenAI:
-# VISION_PROVIDER=azure-openai
-# VISION_API_KEY=
-# AZURE_OPENAI_ENDPOINT=
-# AZURE_OPENAI_DEPLOYMENT=
+VISION_PROVIDER=azure-openai
+VISION_API_KEY=
+AZURE_OPENAI_ENDPOINT=
+AZURE_OPENAI_DEPLOYMENT=
 
 # Optional pacing (4000ms recommended for Google AI Studio Free Tier 15 RPM limit)
 ALT_DELAY_MS=4000
 WB_DELAY_MS=250
 ```
 
-Do not commit `.env`.
 
 ## Running the audit
 

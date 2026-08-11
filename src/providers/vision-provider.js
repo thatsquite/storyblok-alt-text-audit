@@ -38,7 +38,13 @@ export async function generateAltText(input) {
 // Env vars expected:
 //   GOOGLE_API_KEY (or GEMINI_API_KEY / VISION_API_KEY)
 //   GOOGLE_MODEL (optional, default: gemini-2.5-flash)
-async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, userPrompt }) {
+async function callGoogleGemini({
+  imageUrl,
+  filename,
+  folderPath,
+  systemPrompt,
+  userPrompt,
+}) {
   const apiKey =
     process.env.GOOGLE_API_KEY ||
     process.env.GEMINI_API_KEY ||
@@ -46,20 +52,22 @@ async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, 
 
   if (!apiKey) {
     throw new Error(
-      "Missing GOOGLE_API_KEY, GEMINI_API_KEY, or VISION_API_KEY in .env"
+      "Missing GOOGLE_API_KEY, GEMINI_API_KEY, or VISION_API_KEY in .env",
     );
   }
 
-  const requestedModel = (process.env.GOOGLE_MODEL || "gemini-flash-latest").replace(/^models\//, "");
-  // Standard models to attempt in case of model alias mismatch
+  const requestedModel = (
+    process.env.GOOGLE_MODEL || "gemini-3.1-flash-lite"
+  ).replace(/^models\//, "");
+
+  // Candidate chain strictly using stable, high-quota models (500 requests/day). 
+  // Can be updated when moved to paid tier.
   const modelCandidates = Array.from(
     new Set([
-      requestedModel,
-      "gemini-flash-latest",
-      "gemini-2.5-flash",
-      "gemini-2.0-flash",
-      "gemini-1.5-flash-latest",
-    ])
+      requestedModel, 
+      "gemini-3.1-flash-lite",
+      "gemini-3.5-flash-lite"
+    ]),
   );
 
   const filledUserPrompt = userPrompt
@@ -73,10 +81,14 @@ async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, 
       headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
     });
   } catch (err) {
-    throw new Error(`Network error fetching image from URL (${imageUrl}): ${err.message}`);
+    throw new Error(
+      `Network error fetching image from URL (${imageUrl}): ${err.message}`,
+    );
   }
   if (!imgRes.ok) {
-    throw new Error(`Failed to fetch image from URL (${imgRes.status}): ${imageUrl}`);
+    throw new Error(
+      `Failed to fetch image from URL (${imgRes.status}): ${imageUrl}`,
+    );
   }
   const arrayBuffer = await imgRes.arrayBuffer();
   const base64Data = Buffer.from(arrayBuffer).toString("base64");
@@ -117,6 +129,7 @@ async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, 
 
   let lastError;
   for (const model of modelCandidates) {
+    console.log(`[Gemini] Trying model: ${model}...`);
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
@@ -131,7 +144,11 @@ async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, 
     if (response.ok) {
       const raw = await response.json();
       const parts = raw?.candidates?.[0]?.content?.parts || [];
-      const text = parts.map((p) => p.text).filter(Boolean).join(" ").trim();
+      const text = parts
+        .map((p) => p.text)
+        .filter(Boolean)
+        .join(" ")
+        .trim();
       const altText = text
         .replace(/^```[a-z]*\n?/i, "")
         .replace(/\n?```$/i, "")
@@ -142,7 +159,9 @@ async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, 
     }
 
     const text = await response.text();
-    lastError = new Error(`Google Gemini Vision API error ${response.status} (${model}): ${text}`);
+    lastError = new Error(
+      `Google Gemini Vision API error ${response.status} (${model}): ${text}`,
+    );
 
     // If model name returned 404 NOT_FOUND, try the next model candidate in fallback chain
     if (response.status === 404 && text.includes("NOT_FOUND")) {
@@ -160,14 +179,20 @@ async function callGoogleGemini({ imageUrl, filename, folderPath, systemPrompt, 
 //   VISION_API_KEY           the key from ICT
 //   AZURE_OPENAI_ENDPOINT    https://<resource>.openai.azure.com
 //   AZURE_OPENAI_DEPLOYMENT  e.g. gpt-4o
-async function callAzureOpenAI({ imageUrl, filename, folderPath, systemPrompt, userPrompt }) {
+async function callAzureOpenAI({
+  imageUrl,
+  filename,
+  folderPath,
+  systemPrompt,
+  userPrompt,
+}) {
   const key = process.env.VISION_API_KEY;
   const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
   const deployment = process.env.AZURE_OPENAI_DEPLOYMENT;
 
   if (!key || !endpoint || !deployment) {
     throw new Error(
-      "Missing VISION_API_KEY, AZURE_OPENAI_ENDPOINT, or AZURE_OPENAI_DEPLOYMENT in .env"
+      "Missing VISION_API_KEY, AZURE_OPENAI_ENDPOINT, or AZURE_OPENAI_DEPLOYMENT in .env",
     );
   }
 
@@ -213,4 +238,3 @@ async function callAzureOpenAI({ imageUrl, filename, folderPath, systemPrompt, u
 }
 
 export { PROVIDER };
-
