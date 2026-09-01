@@ -213,8 +213,7 @@ async function callAzureOpenAI({
         ],
       },
     ],
-    max_tokens: 100,
-    temperature: 0.2,
+max_completion_tokens: 100,  // If using Google switch to "max_tokens: 100, temperature: 0.2,"
   };
 
   const response = await fetch(url, {
