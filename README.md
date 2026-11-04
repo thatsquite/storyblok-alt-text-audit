@@ -181,6 +181,62 @@ npm run export:story-content
 npm run build:asset-usage
 ```
 
+### Asset cleanup candidates
+
+To find assets with no detected story usage, refresh the shared extraction above
+and run:
+
+```powershell
+npm run report:unused-assets
+```
+
+This writes `output/unused-assets-report.json` and
+`output/unused-assets-report.csv`. The report excludes assets that may match
+unresolved story references or are locked, and lists those separately for
+review. It compares the asset count with the free-tier limit of 2,500 and warns
+when the source export is more than seven days old.
+
+This command is read-only: it does not call Storyblok or delete assets. Review
+each candidate in Storyblok and check for uses outside story asset fields before
+deleting anything.
+
+### Age-based cleanup review
+
+To prepare a read-only list of the 7,500 oldest assets, refresh the shared
+asset and story exports, then run:
+
+```powershell
+npm run report:oldest-assets
+
+# For a smaller age-ranked batch, such as the next 400 oldest remaining assets:
+npm run report:oldest-assets -- --count 400
+```
+
+This writes `output/oldest-assets-deletion-review.json` and
+`output/oldest-assets-deletion-review.csv`, sorted by `created_at` oldest first.
+It includes detected story usage and locked status for review, but does not
+exclude referenced or locked assets. It does not delete assets or call a
+Storyblok write endpoint.
+
+After reviewing and confirming the exact list, use the report's timestamp and
+count. Applying requires an explicit flag and an explicit acknowledgement that
+story-referenced assets are included:
+
+```powershell
+# Dry run
+npm run delete:reviewed-assets -- --confirm-count 7500 --confirm-generated-at "REPORT_TIMESTAMP" --include-referenced
+
+# Apply the exact reviewed list
+npm run delete:reviewed-assets -- --apply --confirm-count 7500 --confirm-generated-at "REPORT_TIMESTAMP" --include-referenced
+
+# Apply a separately reviewed 400-asset report:
+npm run delete:reviewed-assets -- --apply --review-file oldest-assets-deletion-review-400.json --confirm-count 400 --confirm-generated-at "REPORT_TIMESTAMP" --include-referenced
+```
+
+The script checks that the current inventory still has the same 7,500 oldest
+asset IDs, deletes sequential batches of 100 via Storyblok's bulk asset
+endpoint, and writes a local batch log before sending requests.
+
 ### Image alt text
 
 ```powershell

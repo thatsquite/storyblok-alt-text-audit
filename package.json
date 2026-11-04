@@ -19,6 +19,9 @@
     "export:document-excel": "node src/export-document-excel.js",
     "generate:alt-text": "node src/generate-alt-text.js",
     "export:approved-alt": "node src/export-approved-alt.js",
+    "report:unused-assets": "node src/report-unused-assets.js",
+    "report:oldest-assets": "node src/report-oldest-assets.js",
+    "delete:reviewed-assets": "node src/delete-assets-from-review.js",
     "update:asset-alt": "node src/update-asset-alt.js",
     "restore:asset-alt": "node src/restore-asset-alt.js"
   },
